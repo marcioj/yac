@@ -1,0 +1,16 @@
+{
+  "name": "oo",
+  "version": "0.0.0",
+  "description": "Yet another javascript class inheritance library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec test/*_test.js"
+  },
+  "author": "marcioj",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.20.1",
+    "mocha-jshint": "0.0.7",
+    "chai": "^1.9.1"
+  }
+}
