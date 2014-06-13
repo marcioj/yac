@@ -98,4 +98,49 @@ describe("Class", function() {
     expect(animal).to.not.be.instanceof(Human);
     expect(human).to.be.instanceof(Human);
   });
+
+  it("method override calling _super", function() {
+    var Animal = Class.extend({
+      msg: function(msg) {
+        return "animal says: " + msg;
+      }
+    });
+    var Human = Animal.extend({
+      msg: function(msg) {
+        return "human says: " + msg + " and " + this._super(msg);
+      }
+    });
+
+    var animal = new Animal();
+    var human = new Human();
+
+    expect(animal.msg("hello")).to.equal("animal says: hello");
+    expect(human.msg("hello")).to.equal("human says: hello and animal says: hello");
+  });
+
+  it("method override three levels calling _super", function() {
+    var A = Class.extend({
+      msg: function(msg) {
+        return "a" + msg;
+      }
+    });
+    var B = A.extend({
+      msg: function(msg) {
+        return "b" + this._super(msg);
+      }
+    });
+    var C = B.extend({
+      msg: function(msg) {
+        return "c" + this._super(msg);
+      }
+    });
+
+    var a = new A();
+    var b = new B();
+    var c = new C();
+
+    expect(a.msg("x")).to.equal("ax");
+    expect(b.msg("x")).to.equal("bax");
+    expect(c.msg("x")).to.equal("cbax");
+  });
 });

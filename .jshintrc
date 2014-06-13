@@ -35,5 +35,6 @@
   "white": false,
   "eqnull": true,
   "esnext": true,
-  "expr":true
+  "expr":true,
+  "validthis":true
 }
