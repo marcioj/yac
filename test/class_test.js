@@ -73,4 +73,29 @@ describe("Class", function() {
     expect(times).to.equal(2);
     expect(args).to.deep.equal([1, 2, 3]);
   });
+
+  it("two levels of inheritance", function() {
+    var Animal = Class.extend({
+      inherited: true,
+      name: "override me"
+    });
+    var Human = Animal.extend({
+      name: "human",
+      propFromHuman: true
+    });
+
+    var animal = new Animal();
+    var human = new Human();
+
+    expect(animal.inherited).to.equal(true);
+    expect(human.inherited).to.equal(true);
+    expect(animal.name).to.equal("override me");
+    expect(human.name).to.equal("human");
+    expect(animal.propFromHuman).to.not.exist;
+    expect(human.propFromHuman).to.equal(true);
+    expect(animal).to.be.instanceof(Animal);
+    expect(human).to.be.instanceof(Animal);
+    expect(animal).to.not.be.instanceof(Human);
+    expect(human).to.be.instanceof(Human);
+  });
 });
