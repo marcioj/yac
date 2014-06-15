@@ -143,4 +143,125 @@ describe("Class", function() {
     expect(b.msg("x")).to.equal("bax");
     expect(c.msg("x")).to.equal("cbax");
   });
+
+  it("accept mixins", function() {
+    var Salute = {
+      say: function() {
+        return "Hi " + this.name;
+      }
+    };
+    var Foo = Class.extend(Salute, {
+      name: "foo"
+    });
+
+    var foo = new Foo();
+    expect(foo.say()).to.equal("Hi foo");
+    foo.name = "bar";
+    expect(foo.say()).to.equal("Hi bar");
+  });
+
+  it("can override mixin methods", function() {
+    var Occupation = {
+      say: function() {
+        return "a " + this.occupation;
+      }
+    };
+    var Salute = {
+      say: function() {
+        return "Hi I am " + this.name + " " + this._super();
+      }
+    };
+    var Foo = Class.extend(Salute, Occupation, {
+      name: "foo",
+      occupation: "developer"
+    });
+
+    var foo = new Foo();
+    expect(foo.say()).to.equal("Hi I am foo a developer");
+    foo.name = "bar";
+    foo.occupation = "engineer";
+    expect(foo.say()).to.equal("Hi I am bar a engineer");
+  });
+
+  it("properties override mixin properties", function() {
+    var Occupation = {
+      occupation: "your occupation",
+      say: function() {
+        return "a " + this.occupation;
+      }
+    };
+    var Salute = {
+      name: "your name",
+      say: function() {
+        return "Hi I am " + this.name + " " + this._super();
+      }
+    };
+    var Foo = Class.extend(Salute, Occupation, {
+      name: "foo",
+      occupation: "developer"
+    });
+
+    var foo = new Foo();
+    expect(foo.say()).to.equal("Hi I am foo a developer");
+    foo.name = "bar";
+    foo.occupation = "engineer";
+    expect(foo.say()).to.equal("Hi I am bar a engineer");
+  });
+
+  it("uses mixin properties", function() {
+    var Occupation = {
+      occupation: "your occupation",
+      say: function() {
+        return "a " + this.occupation;
+      }
+    };
+    var Salute = {
+      name: "your name",
+      say: function() {
+        return "Hi I am " + this.name + " " + this._super();
+      }
+    };
+    var Foo = Class.extend(Salute, Occupation);
+
+    var foo = new Foo();
+    expect(foo.say()).to.equal("Hi I am your name a your occupation");
+    foo.name = "bar";
+    foo.occupation = "engineer";
+    expect(foo.say()).to.equal("Hi I am bar a engineer");
+  });
+
+  it("uses mixin properties", function() {
+    var Occupation = {
+      occupation: "your occupation",
+      say: function() {
+        return "a " + this.occupation;
+      }
+    };
+    var Salute = {
+      name: "your name",
+      say: function() {
+        return "Hi I am " + this.name + " " + this._super();
+      }
+    };
+    var Foo = Class.extend(Salute, Occupation);
+
+    var foo = new Foo();
+    expect(foo.say()).to.equal("Hi I am your name a your occupation");
+    foo.name = "bar";
+    foo.occupation = "engineer";
+    expect(foo.say()).to.equal("Hi I am bar a engineer");
+  });
+
+  it("delete resets the property", function() {
+    var Foo = Class.extend({
+      foo: "foo"
+    });
+
+    var foo = new Foo();
+    expect(foo.foo).to.equal("foo");
+    foo.foo = "bar";
+    expect(foo.foo).to.equal("bar");
+    delete foo.foo;
+    expect(foo.foo).to.equal("foo");
+  });
 });
