@@ -264,4 +264,41 @@ describe("Class", function() {
     delete foo.foo;
     expect(foo.foo).to.equal("foo");
   });
+
+  it("declared properties are hidden in prototype", function() {
+    var Foo = Class.extend({
+      property: null
+    });
+    var A = Class.extend({
+      method: function() {
+        this.a = "a";
+      }
+    });
+    var B = A.extend({
+      method: function() {
+        this._super();
+        this.b = "b";
+      }
+    });
+    var C = B.extend({
+      method: function() {
+        this._super();
+        this.c = "c";
+      }
+    });
+
+    var foo = new Foo();
+    var a = new A();
+    a.method();
+    var b = new B();
+    b.method();
+    var c = new C();
+    c.method();
+
+    expect(Object.keys(foo)).to.deep.equal([]);
+    expect(Object.keys(a)).to.deep.equal(["a"]);
+    expect(Object.keys(b)).to.deep.equal(["a", "b"]);
+    expect(Object.keys(c)).to.deep.equal(["a", "b", "c"]);
+  });
+
 });
