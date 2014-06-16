@@ -6,6 +6,10 @@
   "scripts": {
     "test": "mocha --reporter spec test/*_test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcioj/oo.git"
+  },
   "author": "marcioj",
   "license": "MIT",
   "devDependencies": {
