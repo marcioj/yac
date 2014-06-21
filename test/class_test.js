@@ -298,4 +298,14 @@ describe("Class", function() {
     expect(Bar.say("hi")).to.equal("barfoohi");
   });
 
+  it("can't call .overrideClass in the base Class", function() {
+    expect(function() {
+      Class.overrideClass();
+    }).to.throws(TypeError, "Can't call overrideClass in the base class");
+
+    expect(function() {
+      Class.extend().overrideClass();
+    }).to.not.throws(TypeError, "Can't call overrideClass in the base class");
+  });
+
 });
