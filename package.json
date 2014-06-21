@@ -2,9 +2,11 @@
   "name": "oo",
   "version": "0.0.0",
   "description": "Yet another javascript class inheritance library",
-  "main": "index.js",
+  "main": "lib/class.js",
   "scripts": {
-    "test": "mocha --reporter spec test/*_test.js"
+    "start": "broccoli serve",
+    "test": "mocha --reporter spec test/*_test.js",
+    "build": "rm -Rf dist/; BROCCOLI_ENV=production broccoli build dist"
   },
   "repository": {
     "type": "git",
@@ -15,6 +17,11 @@
   "devDependencies": {
     "mocha": "^1.20.1",
     "mocha-jshint": "0.0.7",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "broccoli": "^0.12.3",
+    "broccoli-static-compiler": "^0.1.4",
+    "broccoli-browserify": "^0.1.0",
+    "broccoli-merge-trees": "^0.1.4",
+    "broccoli-env": "0.0.1"
   }
 }
