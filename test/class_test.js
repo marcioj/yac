@@ -301,4 +301,23 @@ describe("Class", function() {
     expect(Object.keys(c)).to.deep.equal(["a", "b", "c"]);
   });
 
+  it(".overrideClass override super class properties", function() {
+    var Foo = Class.extend();
+    Foo.overrideClass({
+      say: function(msg) {
+        return "foo" + msg;
+      }
+    });
+
+    var Bar = Foo.extend();
+    Bar.overrideClass({
+      say: function(msg) {
+        return "bar" + this._super(msg);
+      }
+    });
+
+    expect(Foo.say("hi")).to.equal("foohi");
+    expect(Bar.say("hi")).to.equal("barfoohi");
+  });
+
 });
