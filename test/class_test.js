@@ -230,28 +230,6 @@ describe("Class", function() {
     expect(foo.say()).to.equal("Hi I am bar a engineer");
   });
 
-  it("uses mixin properties", function() {
-    var Occupation = {
-      occupation: "your occupation",
-      say: function() {
-        return "a " + this.occupation;
-      }
-    };
-    var Salute = {
-      name: "your name",
-      say: function() {
-        return "Hi I am " + this.name + " " + this._super();
-      }
-    };
-    var Foo = Class.extend(Salute, Occupation);
-
-    var foo = new Foo();
-    expect(foo.say()).to.equal("Hi I am your name a your occupation");
-    foo.name = "bar";
-    foo.occupation = "engineer";
-    expect(foo.say()).to.equal("Hi I am bar a engineer");
-  });
-
   it("delete resets the property", function() {
     var Foo = Class.extend({
       foo: "foo"
