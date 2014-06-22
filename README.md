@@ -1,6 +1,8 @@
-# YAC 
+# YAC
 
 > Yet another javascript class inheritance library
+
+[![Build Status][travis_badge]][travis]
 
 ## API
 
@@ -28,3 +30,5 @@ Use `npm test` to run the tests in the console
 
 Git clone the repo and run `npm run-script build` to build a production source in the `dist` folder
 
+[travis]: https://travis-ci.org/marcioj/yac
+[travis_badge]: https://travis-ci.org/marcioj/yac.svg?branch=master
