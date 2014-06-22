@@ -1,4 +1,4 @@
-# OO 
+# YAC 
 
 > Yet another javascript class inheritance library
 
