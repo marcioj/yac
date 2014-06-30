@@ -4,22 +4,83 @@
 
 [![Build Status][travis_badge]][travis]
 
-## API
+# Instalation
+
+## Browser
+
+Just include `<script src="path/to/class.js"></script>` in your html.
+    
+## Node
+
+Run `npm install yac` in the console, and use `var Class = require("yac")` in the code to import.
+
+## Usage
 
 ### Class.extend()
+
+To define a class just use `Class.extend` passing the properties and functions like a plain javascript object:
+
+```js
+var Cat = Class.extend({
+  init: function(name) {
+    this.name = name;
+  },
+  say: function(message) {
+    return "Cat " + this.name + " says: " + message;
+  }
+});
+
+var garfield = new Cat("Garfield"); // Calls Cat#init and set the "Garfield" as the name
+garfield.say("meow"); // returns "Cat Garfield says: meow";
+garfield instanceof Cat; // returns true
+```
+
+Subclasses are created calling `extend` in the parent class. When a function is already defined you can override it and invoke the parent class implemantation using `this._super(args)`:
+
+```js
+var WildCat = Cat.extend({
+  say: function(message) {
+    return this._super(message.toUpperCase() + "!");
+  }
+});
+
+var wildcat = new WildCat("Tom");
+wildcat.say("meow"); // returns "Cat Tom says: MEOW!"
+```
+
+`extend` also supports mixins. Any object passed as parameter will be merged in the left to right direction:
+
+
+```js
+var Pokemon = {
+  getId: function() {
+    return this.id;
+  },
+  getType: function() {
+    return this.type;
+  }
+}
+
+var Meowth = Cat.extend(Pokemon, {
+  init: function() {
+    this._super("Meowth"); // Calls the super constructor (Cat#init), which set the cat name as "Meowth"
+    this.id = 52;
+    this.type = "normal";
+  }
+});
+
+var meowth = new Meowth();
+meowth.say("meow"); // returns "Cat Meowth says: meow";
+meowth.getId(); // returns 52
+meowth.getType(); // returns "normal"
+
+```
+
+### Class.overrideClass()
 
 TODO
 
 # Develpoment
-
-## Roadmap
-
-- [x] Classical class inheritance via Class.extend
-- [x] Call super method with `_super` in overrided method
-- [x] Mixins
-- [ ] Class Mixins
-- [ ] More tests
-- [ ] Use in a production project
 
 ## Running tests
 
