@@ -84,13 +84,21 @@ TODO
 
 ## Running tests
 
-Run `npm start` and go to http://localhost:4200/test.html to run the tests in the browser
+Run `npm start` and go to [http://localhost:4200/test.html](http://localhost:4200/test.html) to run the tests in the browser
 
 Use `npm test` to run the tests in the console
 
 ## Building from source
 
 Git clone the repo and run `npm run-script build` to build a production source in the `dist` folder
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
 [travis]: https://travis-ci.org/marcioj/yac
 [travis_badge]: https://travis-ci.org/marcioj/yac.svg?branch=master
