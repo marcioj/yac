@@ -1,6 +1,8 @@
 var pickFiles = require("broccoli-static-compiler");
 var browserify = require("broccoli-browserify");
 var mergeTrees = require("broccoli-merge-trees");
+var uglify = require("broccoli-uglify-js");
+var moveFile = require("broccoli-file-mover");
 var env = require("broccoli-env").getEnv();
 
 var dev = env === "development";
@@ -48,5 +50,12 @@ if (dev) {
     outputFile: "class.js"
   });
 
-  module.exports = appTree;
+  var minifiedTree = uglify(appTree);
+
+  var minifiedTree = moveFile(minifiedTree, {
+    srcFile: "class.js",
+    destFile: "class.min.js"
+  });
+
+  module.exports = mergeTrees([appTree, minifiedTree]);
 }
