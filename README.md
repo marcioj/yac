@@ -12,7 +12,7 @@ Just include `<script src="path/to/class.js"></script>` in your html.
     
 ## Node
 
-Run `npm install yac` in the console, and use `var Class = require("yac")` in the code to import.
+Run `npm install yac` in the console, and declare `var Class = require("yac")` in the code to use it.
 
 ## Usage
 
@@ -35,7 +35,7 @@ garfield.say("meow"); // returns "Cat Garfield says: meow";
 garfield instanceof Cat; // returns true
 ```
 
-Subclasses are created calling `extend` in the parent class. When a function is already defined you can override it and invoke the parent class implemantation using `this._super(args)`:
+Subclasses are created calling `extend` in the parent class. When a function is already defined you can override it and invoke the parent class implementation using `this._super(args)`:
 
 ```js
 var WildCat = Cat.extend({
@@ -85,6 +85,7 @@ TODO
 ## Running tests
 
 Run `npm start` and go to http://localhost:4200/test.html to run the tests in the browser
+
 Use `npm test` to run the tests in the console
 
 ## Building from source
