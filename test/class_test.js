@@ -229,6 +229,7 @@ describe("Class", function() {
   it(".overrideClass override class level properties", function() {
     var Foo = Class.extend();
     Foo.overrideClass({
+      displayName: "Foo",
       say: function(msg) {
         return "foo" + msg;
       }
@@ -236,13 +237,31 @@ describe("Class", function() {
 
     var Bar = Foo.extend();
     Bar.overrideClass({
+      displayName: "Bar",
       say: function(msg) {
         return "bar" + this._super(msg);
       }
     });
 
+    expect(Foo.displayName).to.equal("Foo");
+    expect(Bar.displayName).to.equal("Bar");
     expect(Foo.say("hi")).to.equal("foohi");
     expect(Bar.say("hi")).to.equal("barfoohi");
+  });
+
+  it(".overrideClass accept mixins", function() {
+    var Salute = {
+      say: function(msg) {
+        return "foo" + msg;
+      }
+    };
+    var Foo = Class.extend();
+    Foo.overrideClass(Salute, {
+      displayName: "Foo",
+    });
+
+    expect(Foo.displayName).to.equal("Foo");
+    expect(Foo.say("hi")).to.equal("foohi");
   });
 
   it("can't call .overrideClass in the base Class", function() {
