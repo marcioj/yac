@@ -8,7 +8,7 @@ describe("Class", function() {
     expect(Class).to.exist;
   });
 
-  it(".extend generate a new instance", function() {
+  it(".extend generate a new class", function() {
     var Sub = Class.extend({
       foo: "bar",
       hello: function() {
@@ -18,23 +18,6 @@ describe("Class", function() {
     var sub = new Sub();
     expect(sub.foo).to.equal("bar");
     expect(sub.hello()).to.equal("world");
-  });
-
-  it("change properties without affect other instances", function() {
-    var Sub = Class.extend({
-      foo: "bar",
-      hello: function() {
-        return "world";
-      }
-    });
-    var sub = new Sub();
-    expect(sub.foo).to.equal("bar");
-
-    sub.foo = "my bar";
-    var otherSub = new Sub();
-
-    expect(otherSub.foo).to.equal("bar");
-    expect(sub.foo).to.equal("my bar");
   });
 
   it("change properties without affect other instances", function() {
@@ -74,32 +57,32 @@ describe("Class", function() {
     expect(args).to.deep.equal([1, 2, 3]);
   });
 
-  it("two levels of inheritance", function() {
+  it("inherits the properties from superclass", function() {
     var Animal = Class.extend({
-      inherited: true,
+      isAnimal: true,
       name: "override me"
     });
     var Human = Animal.extend({
       name: "human",
-      propFromHuman: true
+      isHuman: true
     });
 
     var animal = new Animal();
     var human = new Human();
 
-    expect(animal.inherited).to.equal(true);
-    expect(human.inherited).to.equal(true);
+    expect(animal.isAnimal).to.equal(true);
+    expect(human.isAnimal).to.equal(true);
     expect(animal.name).to.equal("override me");
     expect(human.name).to.equal("human");
-    expect(animal.propFromHuman).to.not.exist;
-    expect(human.propFromHuman).to.equal(true);
+    expect(animal.isHuman).to.not.exist;
+    expect(human.isHuman).to.equal(true);
     expect(animal).to.be.instanceof(Animal);
     expect(human).to.be.instanceof(Animal);
     expect(animal).to.not.be.instanceof(Human);
     expect(human).to.be.instanceof(Human);
   });
 
-  it("method override calling _super", function() {
+  it("calls the parent class method with _super", function() {
     var Animal = Class.extend({
       msg: function(msg) {
         return "animal says: " + msg;
@@ -118,7 +101,7 @@ describe("Class", function() {
     expect(human.msg("hello")).to.equal("human says: hello and animal says: hello");
   });
 
-  it("method override three levels calling _super", function() {
+  it("calls the parent class method with _super with 2 parent classes", function() {
     var A = Class.extend({
       msg: function(msg) {
         return "a" + msg;
@@ -230,7 +213,7 @@ describe("Class", function() {
     expect(foo.say()).to.equal("Hi I am bar a engineer");
   });
 
-  it("delete resets the property", function() {
+  it("store default properties in the prototype", function() {
     var Foo = Class.extend({
       foo: "foo"
     });
@@ -243,43 +226,7 @@ describe("Class", function() {
     expect(foo.foo).to.equal("foo");
   });
 
-  it("declared properties are hidden in prototype", function() {
-    var Foo = Class.extend({
-      property: null
-    });
-    var A = Class.extend({
-      method: function() {
-        this.a = "a";
-      }
-    });
-    var B = A.extend({
-      method: function() {
-        this._super();
-        this.b = "b";
-      }
-    });
-    var C = B.extend({
-      method: function() {
-        this._super();
-        this.c = "c";
-      }
-    });
-
-    var foo = new Foo();
-    var a = new A();
-    a.method();
-    var b = new B();
-    b.method();
-    var c = new C();
-    c.method();
-
-    expect(Object.keys(foo)).to.deep.equal([]);
-    expect(Object.keys(a)).to.deep.equal(["a"]);
-    expect(Object.keys(b)).to.deep.equal(["a", "b"]);
-    expect(Object.keys(c)).to.deep.equal(["a", "b", "c"]);
-  });
-
-  it(".overrideClass override super class properties", function() {
+  it(".overrideClass override class level properties", function() {
     var Foo = Class.extend();
     Foo.overrideClass({
       say: function(msg) {
