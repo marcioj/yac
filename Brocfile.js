@@ -7,11 +7,12 @@ var env = require("broccoli-env").getEnv();
 
 var dev = env === "development";
 
+var sourceCodeTree = pickFiles("lib", {
+  srcDir: "/",
+  destDir: "/lib"
+});
+
 if (dev) {
-  var sourceCodeTree = pickFiles("lib", {
-    srcDir: "/",
-    destDir: "/lib"
-  });
 
   var testTree = pickFiles("test", {
     srcDir: "/",
@@ -39,10 +40,6 @@ if (dev) {
 
   module.exports = mergeTrees([appTree, testIndexTree, mochaTree]);
 } else {
-  var sourceCodeTree = pickFiles("lib", {
-    srcDir: "/",
-    destDir: "/lib"
-  });
 
   var appTree = browserify(sourceCodeTree, {
     entries: ["./lib/class"],
