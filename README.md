@@ -110,7 +110,7 @@ User.overrideClass(Searchable, {
   path: '/users'
 });
 
-User.overrideClass(Searchable, {
+Post.overrideClass(Searchable, {
   path: '/posts'
 });
 
