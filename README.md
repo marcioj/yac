@@ -78,7 +78,50 @@ meowth.getType(); // returns "normal"
 
 ### Class.overrideClass()
 
-TODO
+Defines methods at class level
+
+```js
+var User = Class.extend();
+
+User.overrideClass({
+  all: function() {
+    return $.ajax('/users.json');
+  }
+});
+
+User.all().then(function(users) {
+  console.log(users);
+});
+```
+
+You can also can pass multiple mixins, like in `extend`
+
+```js
+var Searchable = {
+  all: function() {
+    return $.ajax(this.path + '.json');
+  }
+}
+
+var User = Class.extend();
+var Post = Class.extend();
+
+User.overrideClass(Searchable, {
+  path: '/users'
+});
+
+User.overrideClass(Searchable, {
+  path: '/posts'
+});
+
+User.all().then(function(users) {
+  console.log(users);
+});
+
+Post.all().then(function(posts) {
+  console.log(posts);
+});
+```
 
 # Develpoment
 
