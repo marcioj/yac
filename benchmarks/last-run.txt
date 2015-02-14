@@ -1,0 +1,4 @@
+Class.extend is not optimized
+Class.extend no args x 219,538 ops/sec ±0.92% (94 runs sampled)
+Class.extend one arg x 192,700 ops/sec ±1.00% (95 runs sampled)
+Class.extend two args x 154,991 ops/sec ±0.83% (95 runs sampled)
