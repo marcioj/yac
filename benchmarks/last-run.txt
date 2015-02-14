@@ -1,4 +1,10 @@
+================ Benchmarks ================
+Class.extend no args x 461,536 ops/sec ±0.90% (92 runs sampled)
+Class.extend one arg x 347,469 ops/sec ±0.95% (94 runs sampled)
+Class.extend two args x 248,477 ops/sec ±0.84% (95 runs sampled)
+Sub.overrideClass no args x 406,129 ops/sec ±1.34% (93 runs sampled)
+Sub.overrideClass one arg x 269,663 ops/sec ±1.14% (95 runs sampled)
+Sub.overrideClass two args x 193,292 ops/sec ±1.18% (95 runs sampled)
+================ Optimizations ================
 Class.extend is optimized
-Class.extend no args x 271,151 ops/sec ±0.99% (93 runs sampled)
-Class.extend one arg x 207,417 ops/sec ±0.94% (94 runs sampled)
-Class.extend two args x 163,561 ops/sec ±0.99% (90 runs sampled)
+Sub.overrideClass is optimized
