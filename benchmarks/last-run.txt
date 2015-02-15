@@ -1,20 +1,20 @@
 ================ Benchmarks ================
-Class.extend no args x 416,487 ops/sec ±1.04% (94 runs sampled)
-Class.extend one arg x 325,550 ops/sec ±1.23% (94 runs sampled)
-Class.extend two args x 238,117 ops/sec ±1.18% (94 runs sampled)
-Sub.overrideClass no args x 372,458 ops/sec ±1.37% (92 runs sampled)
-Sub.overrideClass one arg x 273,207 ops/sec ±1.53% (92 runs sampled)
-Sub.overrideClass two args x 206,677 ops/sec ±1.39% (91 runs sampled)
-new Base() no args x 29,605,454 ops/sec ±1.36% (89 runs sampled)
-new Base() one arg x 26,747,191 ops/sec ±0.78% (96 runs sampled)
-new Base() two args x 24,506,628 ops/sec ±1.18% (92 runs sampled)
-parent.say() no args x 12,423,173 ops/sec ±1.37% (92 runs sampled)
-parent.say() one arg x 45,916,204 ops/sec ±2.62% (84 runs sampled)
-child.say() no args x 4,273,124 ops/sec ±0.68% (97 runs sampled)
-child.say() one arg x 7,889,215 ops/sec ±0.80% (95 runs sampled)
+Class.extend no args x 379,246 ops/sec ±1.55% (85 runs sampled)
+Class.extend one arg x 288,480 ops/sec ±1.11% (94 runs sampled)
+Class.extend two args x 214,290 ops/sec ±1.21% (93 runs sampled)
+Sub.overrideClass no args x 314,317 ops/sec ±2.43% (91 runs sampled)
+Sub.overrideClass one arg x 244,453 ops/sec ±1.41% (93 runs sampled)
+Sub.overrideClass two args x 180,541 ops/sec ±1.91% (88 runs sampled)
+new Base() no args x 27,113,358 ops/sec ±1.35% (95 runs sampled)
+new Base() one arg x 22,423,326 ops/sec ±1.92% (89 runs sampled)
+new Base() two args x 22,364,285 ops/sec ±0.83% (97 runs sampled)
+parent.say() no args x 12,093,960 ops/sec ±0.88% (94 runs sampled)
+parent.say() one arg x 42,697,189 ops/sec ±1.81% (92 runs sampled)
+child.say() no args x 4,157,883 ops/sec ±1.04% (94 runs sampled)
+child.say() one arg x 7,666,569 ops/sec ±0.77% (94 runs sampled)
 ================ Optimizations ================
 Class.extend is optimized
 Sub.overrideClass is optimized
-new Sub() is optimized
-parent.say() is optimized
-child.say() is optimized
+Base is optimized
+parent.say is optimized
+child.say is optimized

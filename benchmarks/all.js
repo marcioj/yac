@@ -84,13 +84,7 @@ function printStatus(fn, fnName) {
   }
 }
 
-// Taken from https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#1-tooling
-// Class.extend
-Class.extend(); // Fill type-info
-Class.extend(); // 2 calls are needed to go from uninitialized -> pre-monomorphic -> monomorphic
-%OptimizeFunctionOnNextCall(Class.extend);
-Class.extend(); // The next call
-printStatus(Class.extend, "Class.extend"); // Check
+printStatus(Class.extend, "Class.extend");
 
 // Sub.overrideClass
 var Sub = Class.extend();
@@ -100,17 +94,7 @@ Sub.overrideClass(); // 2 calls are needed to go from uninitialized -> pre-monom
 Sub.overrideClass(); // The next call
 printStatus(Sub.overrideClass, "Sub.overrideClass"); // Check
 
-// new Sub()
-var Sub = Class.extend();
-new Sub(); // Fill type-info
-new Sub(); // 2 calls are needed to go from uninitialized -> pre-monomorphic -> monomorphic
-%OptimizeFunctionOnNextCall(Sub);
-new Sub(); // The next call
-printStatus(Sub, "new Sub()"); // Check
-
-// parent.say()
-printStatus(parent.say, "parent.say()"); // Check
-
-// child.say()
-printStatus(child.say, "child.say()"); // Check
+printStatus(Base, "Base");
+printStatus(parent.say, "parent.say");
+printStatus(child.say, "child.say");
 
