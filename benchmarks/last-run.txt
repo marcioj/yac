@@ -1,10 +1,14 @@
 ================ Benchmarks ================
-Class.extend no args x 461,536 ops/sec ±0.90% (92 runs sampled)
-Class.extend one arg x 347,469 ops/sec ±0.95% (94 runs sampled)
-Class.extend two args x 248,477 ops/sec ±0.84% (95 runs sampled)
-Sub.overrideClass no args x 406,129 ops/sec ±1.34% (93 runs sampled)
-Sub.overrideClass one arg x 269,663 ops/sec ±1.14% (95 runs sampled)
-Sub.overrideClass two args x 193,292 ops/sec ±1.18% (95 runs sampled)
+Class.extend no args x 433,042 ops/sec ±1.06% (88 runs sampled)
+Class.extend one arg x 327,230 ops/sec ±1.33% (93 runs sampled)
+Class.extend two args x 229,817 ops/sec ±1.08% (93 runs sampled)
+Sub.overrideClass no args x 368,774 ops/sec ±1.61% (90 runs sampled)
+Sub.overrideClass one arg x 280,830 ops/sec ±1.80% (89 runs sampled)
+Sub.overrideClass two args x 206,006 ops/sec ±1.43% (89 runs sampled)
+new Base() no args x 20,445,914 ops/sec ±0.78% (97 runs sampled)
+new Base() one arg x 17,266,706 ops/sec ±1.11% (90 runs sampled)
+new Base() two args x 16,346,326 ops/sec ±1.22% (95 runs sampled)
 ================ Optimizations ================
 Class.extend is optimized
 Sub.overrideClass is optimized
+new Sub() is not optimized

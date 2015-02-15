@@ -1,6 +1,7 @@
 var Benchmark = require('benchmark');
 var Suite = new Benchmark.Suite;
 var Class = require('../lib/class');
+var Base = Class.extend();
 
 function printStatus(fn, fnName) {
   switch(%GetOptimizationStatus(fn)) {
@@ -42,6 +43,15 @@ Suite
     var Other = { bar: "bar" };
     Sub.overrideClass(Base, Other);
   })
+  .add('new Base() no args', function () {
+    new Base();
+  })
+  .add('new Base() one arg', function () {
+    new Base(1);
+  })
+  .add('new Base() two args', function () {
+    new Base(1, {});
+  })
   .on('cycle', function(event) {
     console.log(String(event.target));
   })
@@ -63,4 +73,12 @@ Sub.overrideClass(); // 2 calls are needed to go from uninitialized -> pre-monom
 %OptimizeFunctionOnNextCall(Sub.overrideClass);
 Sub.overrideClass(); // The next call
 printStatus(Sub.overrideClass, "Sub.overrideClass"); // Check
+
+// new Sub()
+var Sub = Class.extend();
+new Sub(); // Fill type-info
+new Sub(); // 2 calls are needed to go from uninitialized -> pre-monomorphic -> monomorphic
+%OptimizeFunctionOnNextCall(Sub);
+new Sub(); // The next call
+printStatus(Sub, "new Sub()"); // Check
 
