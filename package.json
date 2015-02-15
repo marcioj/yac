@@ -6,7 +6,8 @@
   "scripts": {
     "start": "broccoli serve",
     "test": "mocha --reporter spec test/*_test.js",
-    "build": "rm -Rf dist/; BROCCOLI_ENV=production broccoli build dist"
+    "build": "rm -Rf dist/; BROCCOLI_ENV=production broccoli build dist",
+    "benchmark": "node --allow-natives-syntax benchmarks/all.js"
   },
   "repository": {
     "type": "git",

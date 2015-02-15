@@ -1,2 +1,0 @@
-#!/bin/bash
-node --allow-natives-syntax benchmarks/all.js
