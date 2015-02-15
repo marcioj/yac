@@ -61,6 +61,12 @@ Suite
   .add('parent.say() one arg', function () {
     parent.say("hello");
   })
+  .add('child.say() no args', function () {
+    child.say();
+  })
+  .add('child.say() one arg', function () {
+    child.say("hello");
+  })
   .on('cycle', function(event) {
     console.log(String(event.target));
   })
@@ -104,4 +110,7 @@ printStatus(Sub, "new Sub()"); // Check
 
 // parent.say()
 printStatus(parent.say, "parent.say()"); // Check
+
+// child.say()
+printStatus(child.say, "child.say()"); // Check
 
