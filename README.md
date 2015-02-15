@@ -9,7 +9,7 @@
 ## Browser
 
 Just include `<script src="path/to/class.js"></script>` in your html.
-    
+
 ## Node
 
 Run `npm install yac` in the console, and declare `var Class = require("yac")` in the code to use it.
