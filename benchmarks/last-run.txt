@@ -1,14 +1,17 @@
 ================ Benchmarks ================
-Class.extend no args x 433,042 ops/sec ±1.06% (88 runs sampled)
-Class.extend one arg x 327,230 ops/sec ±1.33% (93 runs sampled)
-Class.extend two args x 229,817 ops/sec ±1.08% (93 runs sampled)
-Sub.overrideClass no args x 368,774 ops/sec ±1.61% (90 runs sampled)
-Sub.overrideClass one arg x 280,830 ops/sec ±1.80% (89 runs sampled)
-Sub.overrideClass two args x 206,006 ops/sec ±1.43% (89 runs sampled)
-new Base() no args x 20,445,914 ops/sec ±0.78% (97 runs sampled)
-new Base() one arg x 17,266,706 ops/sec ±1.11% (90 runs sampled)
-new Base() two args x 16,346,326 ops/sec ±1.22% (95 runs sampled)
+Class.extend no args x 411,534 ops/sec ±1.19% (92 runs sampled)
+Class.extend one arg x 323,159 ops/sec ±1.27% (96 runs sampled)
+Class.extend two args x 228,555 ops/sec ±1.17% (95 runs sampled)
+Sub.overrideClass no args x 334,317 ops/sec ±3.87% (82 runs sampled)
+Sub.overrideClass one arg x 255,102 ops/sec ±2.64% (87 runs sampled)
+Sub.overrideClass two args x 200,055 ops/sec ±1.65% (91 runs sampled)
+new Base() no args x 26,906,039 ops/sec ±0.68% (98 runs sampled)
+new Base() one arg x 24,897,920 ops/sec ±1.31% (91 runs sampled)
+new Base() two args x 24,129,880 ops/sec ±1.23% (94 runs sampled)
+parent.say() no args x 12,298,880 ops/sec ±1.01% (94 runs sampled)
+parent.say() one arg x 42,697,297 ops/sec ±4.79% (85 runs sampled)
 ================ Optimizations ================
 Class.extend is optimized
 Sub.overrideClass is optimized
-new Sub() is not optimized
+new Sub() is optimized
+parent.say() is optimized

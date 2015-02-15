@@ -1,19 +1,22 @@
 var Benchmark = require('benchmark');
 var Suite = new Benchmark.Suite;
 var Class = require('../lib/class');
-var Base = Class.extend();
-
-function printStatus(fn, fnName) {
-  switch(%GetOptimizationStatus(fn)) {
-    case 1: console.log(fnName, "is optimized"); break;
-    case 2: console.log(fnName, "is not optimized"); break;
-    case 3: console.log(fnName, "is always optimized"); break;
-    case 4: console.log(fnName, "is never optimized"); break;
-    case 6: console.log(fnName, "is maybe deoptimized"); break;
-  }
-}
 
 console.log('================ Benchmarks ================');
+
+var Base = Class.extend();
+var Parent = Class.extend({
+  say: function(msg) {
+    return "Parent says: " + msg;
+  }
+});
+var Child = Parent.extend({
+  say: function(msg) {
+    return this._super(msg) + "\n" + "Child says: " + msg;
+  }
+});
+var parent = new Parent();
+var child = new Child();
 
 Suite
   .add('Class.extend no args', function () {
@@ -52,12 +55,29 @@ Suite
   .add('new Base() two args', function () {
     new Base(1, {});
   })
+  .add('parent.say() no args', function () {
+    parent.say();
+  })
+  .add('parent.say() one arg', function () {
+    parent.say("hello");
+  })
   .on('cycle', function(event) {
     console.log(String(event.target));
   })
   .run();
 
 console.log('================ Optimizations ================');
+
+function printStatus(fn, fnName) {
+  switch(%GetOptimizationStatus(fn)) {
+    case 1: console.log(fnName, "is optimized"); break;
+    case 2: console.log(fnName, "is not optimized"); break;
+    case 3: console.log(fnName, "is always optimized"); break;
+    case 4: console.log(fnName, "is never optimized"); break;
+    case 6: console.log(fnName, "is maybe deoptimized"); break;
+  }
+}
+
 // Taken from https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#1-tooling
 // Class.extend
 Class.extend(); // Fill type-info
@@ -81,4 +101,7 @@ new Sub(); // 2 calls are needed to go from uninitialized -> pre-monomorphic -> 
 %OptimizeFunctionOnNextCall(Sub);
 new Sub(); // The next call
 printStatus(Sub, "new Sub()"); // Check
+
+// parent.say()
+printStatus(parent.say, "parent.say()"); // Check
 
