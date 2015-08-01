@@ -1,31 +1,30 @@
-var pickFiles = require("broccoli-static-compiler");
 var browserify = require("broccoli-browserify");
 var mergeTrees = require("broccoli-merge-trees");
 var uglify = require("broccoli-uglify-js");
-var moveFile = require("broccoli-file-mover");
+var funnel = require("broccoli-funnel");
 var env = require("broccoli-env").getEnv();
 
 var dev = env === "development";
 
-var sourceCodeTree = pickFiles("lib", {
+var sourceCodeTree = funnel("lib", {
   srcDir: "/",
   destDir: "/lib"
 });
 
 if (dev) {
 
-  var testTree = pickFiles("test", {
+  var testTree = funnel("test", {
     srcDir: "/",
     destDir: "/test"
   });
 
-  var testIndexTree = pickFiles("test", {
+  var testIndexTree = funnel("test", {
     srcDir: "/",
     files: ["test.html"],
     destDir: "/"
   });
 
-  var mochaTree = pickFiles("node_modules", {
+  var mochaTree = funnel("node_modules", {
     srcDir: "/mocha",
     files: ["mocha.js", "mocha.css"],
     destDir: "/"
@@ -49,9 +48,9 @@ if (dev) {
 
   var minifiedTree = uglify(appTree);
 
-  var minifiedTree = moveFile(minifiedTree, {
-    srcFile: "class.js",
-    destFile: "class.min.js"
+  var minifiedTree = funnel(minifiedTree, {
+    srcDir: "class.js",
+    destDir: "class.min.js"
   });
 
   module.exports = mergeTrees([appTree, minifiedTree]);
